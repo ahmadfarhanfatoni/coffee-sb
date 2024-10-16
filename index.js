@@ -3,10 +3,10 @@ const dotenv = require("dotenv");
 const db = require("./src/config/db");
 const route = require("./src/routes");
 const cloudinaryConfig = require("./src/config/cloudinary");
-const cors = require("cors");
+const cors = require('cors')
 
-const transactions = require("./src/models/Transactions");
-const users = require("./src/models/Users");
+// const transactions = require("./src/models/Transactions");
+// const users = require("./src/models/Users");
 
 
 // const products = require("./src/models/Products");
@@ -54,21 +54,21 @@ app.use(express.static(__dirname));
 
 // })
 
-users.sync().then(()=>{
-  console.log('DB conected');
+// users.sync().then(()=>{
+//   console.log('DB conected');
   
-}).catch(err=>{
-  console.log(err);
+// }).catch(err=>{
+//   console.log(err);
   
-})
+// })
 
-transactions.sync().then(()=>{
-  console.log('DB conected');
+// transactions.sync().then(()=>{
+//   console.log('DB conected');
   
-}).catch(err=>{
-  console.log(err);
+// }).catch(err=>{
+//   console.log(err);
   
-})
+// })
 
 
 
