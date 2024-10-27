@@ -1,6 +1,7 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize')
 const db = require("../config/db");
 const products = require("./Products");
+const users = require("./Users");
 
 const transactions = db.define(
   "trsnsaction",
@@ -50,3 +51,8 @@ const transactions = db.define(
 );
 
 module.exports = transactions;
+
+transactions.belongsTo(users, {foreignKey : 'userId', as : 'users'})
+transactions.belongsTo(products, {foreignKey : 'productId', as : 'products'})
+users.hasMany(transactions, {foreignKey : 'id'})
+products.hasMany(transactions, {foreignKey : 'id'})
