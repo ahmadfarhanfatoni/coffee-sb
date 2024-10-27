@@ -26,7 +26,8 @@ const createProduct = async (req, res) => {
 
     //memberikan sresponse ke client
     res.status(201).json({
-      msg: "success create product" });
+      msg: "success create product",
+    });
   } catch (error) {
     console.log(error);
     res.status(400).json({
@@ -40,12 +41,12 @@ const createProduct = async (req, res) => {
 
 const findAllProduct = async (req, res) => {
   const {
-    search = "",   
-    orderBy = "id", 
-    sortBy = "ASC", 
-    limit = 10, 
-    page = 1, 
-    category = "", 
+    search = "",
+    orderBy = "id",
+    sortBy = "ASC",
+    limit = 10,
+    page = 1,
+    category = "",
   } = req.query;
 
   const offset = (page - 1) * limit;
@@ -91,8 +92,14 @@ const findAllProduct = async (req, res) => {
 const findOneProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const data = await db.query(`select * from "products" p where id  = ${id}`);
-    res.status(200).json({ data: data[0] });
+    const data = await products.findByPk(id);
+    if (!data) {
+      return res.status(404).json({ msg: `Product Not Found` });
+    }
+    res.status(200).json({
+      msg: "Success",
+      data,
+    });
   } catch (error) {
     console.log({ error });
     res.status(500).json({ error });
